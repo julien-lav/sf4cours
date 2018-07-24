@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 use App\Entity\User;
+use App\Entity\Article;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Form\LoginType;
+use App\Form\ArticleType;
 use App\Repository\UserRepository;
+use App\Repository\ArticleRepository;
+
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -17,8 +21,6 @@ class PrintController extends Controller
      */
     public function index()
     {
-
-
 
     	$user = new User();
     	$user->setFirstname("Paladin");
@@ -62,8 +64,29 @@ class PrintController extends Controller
     		'form' => $form->createView(),
     		'users'=> $users,
     	));
-
-
-
     }
+
+    /**
+     * @Route("/article", name="article")
+     */
+    public function article(Request $request, ArticleRepository $articleRepository)
+    {
+    	$article = new Article();
+    	$form = $this->createForm(ArticleType::class, $article);
+    	$form->handleRequest($request);
+
+    	if($form->isSubmitted() && $form->isValid()) {
+    		$em = $this->getDoctrine()->getManager();
+    		$em->persist($article);
+    		$em->flush();
+    	}
+
+    	$articles = $articleRepository->findAll();
+
+    	return $this->render('article/index.html.twig', array(
+    		'form' => $form->createView(),
+    		'articles'=> $articles,
+    	));
+    }
+
 }

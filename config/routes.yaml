@@ -1,3 +1,7 @@
 index:
     path: /print
     controller: App\Controller\PrintController::index
+
+home:
+    path: /home
+    controller: App\Controller\HomeController::index
