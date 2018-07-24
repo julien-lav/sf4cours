@@ -1,0 +1,18 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Hello !{% endblock %}
+{% block body %}
+
+   {{ form_start(form) }}
+   {{ form_widget(form) }}
+   {{ form_end(form) }}
+
+	<ul>
+		{% for user in users %}
+		        <li>{{ user.firstname }} <br />-  est né(e) le : {{ user.birthday | date('Y-m-d') }} </li>
+		{% endfor %}s
+	</ul>
+
+{% endblock %}

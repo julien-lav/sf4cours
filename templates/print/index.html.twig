@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello !{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello ! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+
+     {% for user in tabs %}
+        <li>{{ user.firstname|e }} <br />- tu es inscrit le : {{ user.birthday | date('Y-m-d H:i:s') }} </li>
+     {% endfor %}
+
+		<br />
+    	<hr>
+    	<br />
+     
+     {% for user in users %}
+        <li>{{ user.firstname|e }} <br />- tu es née le : {{ user.birthday | date('Y-m-d') }} </li>
+     {% endfor %}
+
+     <a href="/print">index</a>
+
+
+    	<br />
+        <li>Your controller at <code><a href="{{ 'src/Controller/PrintController.php'|file_link(0) }}">src/Controller/PrintController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'templates/print/index.html.twig'|file_link(0) }}">templates/print/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}

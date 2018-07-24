@@ -1,0 +1,3 @@
+index:
+    path: /print
+    controller: App\Controller\PrintController::index
